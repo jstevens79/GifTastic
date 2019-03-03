@@ -15,11 +15,20 @@ html, body {
 
 #topicsContainer {
   flex: 1;
-  background: black;
+  background: #0e0e0e;
+  border-right: solid 1px rgba(255,255,255,0.1);
 }
 
 #gifsDisplayed {
   flex: 3;
-  background: gray;
+  background: #1b1b1b;
   overflow: auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+}
+
+.gifContainer {
+  flex: 0;
+  padding: 10px;
 }

@@ -1,5 +1,6 @@
 // topics to display
-var topics = ['batman', 'spider-man', 'wolverine'];
+var starterTopics = ['batman', 'spider-man', 'wolverine'];
+var topics = [];
 
 function renderButtons() {
   var buttonsRendered = [];
@@ -41,11 +42,15 @@ $(document).on("click", ".showMeTheGiphy", function() {
   }).then(function(response) {
     var results = response.data;
     var gifs = [];
+    console.log(results)
 
     results.forEach(function(res) {
-      var gifDiv = $('<div>');
-      var myGif = $('<img>');
-      myGif.attr('src', res.images.fixed_height.url);
+      var gifDiv = $('<div>').addClass('gifContainer');
+      var myGif = $('<img>').addClass('gif');
+      myGif.attr('src', res.images.fixed_height_still.url);
+      myGif.attr('data-src-still', res.images.fixed_height_still.url);
+      myGif.attr('data-src-gif', res.images.fixed_height.url);
+      myGif.attr('data-state', "still");
       gifDiv.append(myGif);
       gifs.push(gifDiv)
     })
@@ -53,10 +58,22 @@ $(document).on("click", ".showMeTheGiphy", function() {
     $('#gifsDisplayed').prepend(gifs);
     
   });
-
 })
 
+$(document).on("click", ".gif", function() {
+  if ($(this).attr('data-state') === 'still') {
+    $(this).attr('src', $(this).data('src-gif'));
+    $(this).attr('data-state', 'playing');
+  } else {
+    $(this).attr('src', $(this).data('src-still'));
+    $(this).attr('data-state', 'still')
+  }
+})
+
+
+
 $(document).ready(function() {
+  topics = (!topics.length) ? starterTopics : topics;
   renderButtons();
 })
 
