@@ -5,6 +5,8 @@
 html, body {
   width: 100%;
   height: 100%;
+  font-family: 'Overpass', sans-serif;
+  font-weight: 400;
 }
 
 .wrapper {
@@ -17,18 +19,130 @@ html, body {
   flex: 1;
   background: #0e0e0e;
   border-right: solid 1px rgba(255,255,255,0.1);
+  overflow: auto;
+  position: relative;
+  padding-top: 100px;
+}
+
+#addTopics {
+  position: absolute;
+  width: 100%;
+  height: 80px;
+  background: black;
+  top: 0;
+  display: flex;
+  align-content: center;
+  padding: 20px;
+}
+
+#topic-input {
+  border-radius: 4px;
+  font-size: 1.3em;
+  padding: 10px 20px;
+  flex: 1;
+  border: none;
+  width: 100px;
+  min-width: 250;
 }
 
 #gifsDisplayed {
   flex: 3;
   background: #1b1b1b;
   overflow: auto;
+}
+
+.gifHolder {
   display: flex;
   flex-wrap: wrap;
-  align-content: flex-start;
+  padding-bottom: 20px;
 }
 
 .gifContainer {
-  flex: 0;
   padding: 10px;
+}
+
+.gif {
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+h2 {
+  padding: 20px;
+  width: 100%;
+  color: white;
+  font-size: 1.8em;
+  border-top: solid 1px rgba(255,255,255,0.1);
+}
+
+h2::first-letter {
+  color: rgb(236, 205, 28);
+  text-transform: uppercase;
+}
+
+.topics {
+  display: flex;
+  flex-direction: column;
+}
+
+.topics li {
+  padding: 5px 20px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.showMeTheGiphy, .remove, #topic-add {
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  transition: background-color .25s ease, color .25s ease, padding .25s ease;
+}
+
+.showMeTheGiphy {
+  font-size: 1.3em;
+  flex: 1;
+  background-color: rgba(69, 240, 240, 0.1);
+  color: white;
+  font-weight: normal;
+  padding: 14px 20px;
+  text-align: left;
+}
+
+.showMeTheGiphy::first-letter {
+  text-transform: capitalize;
+}
+
+.showMeTheGiphy:focus, .remove:focus {
+  outline: none;
+}
+
+.showMeTheGiphy:hover {
+  background-color: rgb(69, 240, 240, 0.8);
+  color: black;
+}
+
+.showMeTheGiphy:active {
+  background-color: rgb(69, 240, 240, 0.4);
+  color: black;
+}
+
+.remove, #topic-add {
+  margin-left: 20px;
+  padding: 0 10px;
+  font-weight: bold;
+  font-size: 1.5em;
+}
+
+.remove {
+  width: 1.2em;
+  height: 1.2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #292929;
+}
+
+.remove:hover {
+  background-color: #575757;
+  color: white;
 }
