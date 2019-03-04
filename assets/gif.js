@@ -2,6 +2,8 @@
 var starterTopics = ['elephant', 'alligator', 'elephant', 'monkey', 'dog', 'cat'];
 var topics = [];
 var trending = false;
+var editOpen = false;
+var storing = false;
 
 function renderButtons() {
   var buttonsRendered = [];
@@ -14,7 +16,10 @@ function renderButtons() {
     var remove = $('<button>')
                   .addClass('remove')
                   .attr('data-remove', topic)
-                  .text('-');
+                  .html('<i class="fas fa-minus-square"></i>');
+    if (editOpen) {
+      remove.addClass('displayed');
+    }
     bttnContainer.append(bttn, remove);
     buttonsRendered.push(bttnContainer)
   })
@@ -29,6 +34,9 @@ $('#topic-add').click(function(e) {
   var newTopic = $('#topic-input').val().trim();
   if (newTopic !== '') {
     topics.unshift(newTopic);
+    if (storing) {
+      localStorage.setItem('gifTopics', JSON.stringify(topics));
+    }
     renderButtons();
   }
   $('#topic-input').val('');
@@ -87,6 +95,9 @@ $(document).on("click", ".remove", function() {
   var myTopic = $(this).attr('data-remove');
   var myIndex = topics.indexOf(myTopic)
   topics.splice(myIndex, 1);
+  if (storing) {
+    localStorage.setItem('gifTopics', JSON.stringify(topics));
+  }
   renderButtons();
 });
 
@@ -103,18 +114,40 @@ $(document).on("click", ".gif", function() {
 
 $('.saveLink').click(function(e) {
   e.preventDefault();
+  storing = !storing;
+  if (storing) {
+    $(this).find('.indicator').html('<i class="fas fa-bookmark"></i>');
+    localStorage.setItem('gifTopics', JSON.stringify(topics));
+  } else {
+    $(this).find('.indicator').html('<i class="far fa-bookmark"></i>');
+    localStorage.removeItem('gifTopics');
+  }
 });
+
 
 $('.editLink').click(function(e) {
   e.preventDefault();
+  editOpen = !editOpen;
+  if (editOpen) {
+    $(this).text('close')
+  } else {
+    $(this).text('edit list')
+  }
+  $('.remove').toggle("fast", function() {
+    console.log('anything?')
+    $('.remove').addClass('displayed');
+  })
 });
 
 
-
-
-
 $(document).ready(function() {
-  topics = (!topics.length) ? starterTopics : topics;
+  if (localStorage.gifTopics !== undefined) {
+    storing = true;
+    $('.saveLink').find('.indicator').html('<i class="fas fa-bookmark"></i>');
+    topics = JSON.parse(localStorage.gifTopics)
+  } else {
+    topics = starterTopics;
+  }
   renderButtons();
   getGifs();
 })

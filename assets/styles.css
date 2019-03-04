@@ -134,8 +134,8 @@ h2::first-letter {
 .showMeTheGiphy {
   font-size: 1.3em;
   flex: 1;
-  background-color: rgba(15, 145, 231, 0.1);
-  color: rgb(15, 145, 231);
+  background-color: rgba(22, 99, 170, 0.15);
+  color: rgb(22, 99, 170);
   font-weight: normal;
   padding: 18px 20px;
   text-align: left;
@@ -150,33 +150,33 @@ h2::first-letter {
 }
 
 .showMeTheGiphy:hover {
-  background-color: rgba(15, 145, 231, 0.8);
+  background-color: rgba(22, 99, 170, 0.8);
   color: white;
 }
 
 .showMeTheGiphy:active {
-  background-color: rgb(15, 145, 231, 0.4);
+  background-color: rgb(22, 99, 170, 0.4);
   color: white;
 }
 
 .remove, #topic-add {
-  margin-left: 20px;
-  padding: 0 10px;
+  margin-left: 16px;
   font-weight: bold;
   font-size: 1.5em;
 }
 
 .remove {
-  width: 1.2em;
-  height: 1.2em;
+  width: auto;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #292929;
+  height: 100%;
+  text-align: right;
+  justify-content: flex-end;
   opacity: 0;
   display: none;
-  overflow: hidden;
+  font-size: 1.6em;
   transition: opacity .3s ease;
+  padding: 0;
+  color: gray;
 }
 
 .remove.displayed {
@@ -185,11 +185,19 @@ h2::first-letter {
 }
 
 .remove:hover {
-  background-color: #575757;
-  color: white;
+  color: black;
 }
 
 .saveLink, .editLink {
   color: rgba(255,255,255,0.4);
   text-decoration: none;
+}
+
+.saveLink:hover, .editLink:hover {
+  color: rgba(255,255,255,1);
+  text-decoration: none;
+}
+
+.indicator {
+  padding-right: 6px;
 }
