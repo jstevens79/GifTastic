@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link href="https://fonts.googleapis.com/css?family=Overpass:300,400,600" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
   <link href="./assets/reset.css" rel="stylesheet">
   <link href="./assets/styles.css" rel="stylesheet">
   <title>GifTastic</title>
@@ -17,12 +18,16 @@
           <input id="topic-input" autocomplete="off" placeholder="Add a topic">
           <button id="topic-add">+</button>
         </form>
-        <span>Save my list</span>
-        <span>Edit list</span>
+        <div class="preferences">
+          <a class="saveLink" href="#">Save my list</a>
+          <a class="editLink" href="#">Edit list</a>
+        </div>
       </div>
       <ul class="topics"></ul>
     </div>
-    <div id="gifsDisplayed"></div>
+    <div id="gifsDisplayed">
+      <div id="gifsContainer"></div>
+    </div>
   </div>
   <script
   src="https://code.jquery.com/jquery-3.3.1.min.js"

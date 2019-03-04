@@ -41,7 +41,7 @@ function getGifs(gif) {
 
   if (gif !== undefined) {
     if (trending === true) {
-      $('#gifsDisplayed').empty();
+      $('#gifsContainer').empty();
       trending = false;
     }
     queryURL = "https://api.giphy.com/v1/gifs/search?q=" + gif + "&api_key=TCW1jTUIEdZrL78UFfUCHtWVO7VpiHTg&rating=pg&limit=10&offset=0";
@@ -71,8 +71,8 @@ function getGifs(gif) {
       gifHolder.append(gifDiv);
     })
     
-
-    $('#gifsDisplayed').prepend(gifHolder);
+    $('#gifsContainer').prepend(gifHolder);
+    $('#gifsDisplayed').scrollTop($('#gifsDisplayed').scrollTop() + $('#gifsContainer').position().top - 40);
     
   });
   
@@ -80,7 +80,7 @@ function getGifs(gif) {
 
 $(document).on("click", ".showMeTheGiphy", function() {
   var gif = $(this).attr("data-gif");
-  getGifs(gif)  
+  getGifs(gif);
 });
 
 $(document).on("click", ".remove", function() {
@@ -100,6 +100,15 @@ $(document).on("click", ".gif", function() {
     $(this).attr('data-state', 'still')
   }
 })
+
+$('.saveLink').click(function(e) {
+  e.preventDefault();
+});
+
+$('.editLink').click(function(e) {
+  e.preventDefault();
+});
+
 
 
 
