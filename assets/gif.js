@@ -27,7 +27,6 @@ function renderButtons() {
   $('.topics').empty().append(buttonsRendered)
 }
 
-
 // add button
 $('#topic-add').click(function(e) {
   e.preventDefault();
@@ -42,7 +41,6 @@ $('#topic-add').click(function(e) {
   $('#topic-input').val('');
 })
 
-
 function getGifs(gif) {
   var queryURL = '';
   var gifTitle = '';
@@ -55,7 +53,7 @@ function getGifs(gif) {
     queryURL = "https://api.giphy.com/v1/gifs/search?q=" + gif + "&api_key=TCW1jTUIEdZrL78UFfUCHtWVO7VpiHTg&rating=pg&limit=10&offset=0";
     gifTitle = gif;
   } else {
-    queryURL = "https://api.giphy.com/v1/gifs/trending?api_key=TCW1jTUIEdZrL78UFfUCHtWVO7VpiHTg&rating=pg&limit=10";
+    queryURL = "https://api.giphy.com/v1/gifs/trending?api_key=TCW1jTUIEdZrL78UFfUCHtWVO7VpiHTg&rating=pg-13&limit=10";
     gifTitle = 'Some trending GIFs to get you started';
     trending = true;
   }
@@ -70,12 +68,18 @@ function getGifs(gif) {
     gifHolder.append(title);
     results.forEach(function(res) {
       var gifDiv = $('<div>').addClass('gifContainer');
+      var gifOverlay = $('<div>').addClass('gifOverlay');
+      var rating = $('<span>').addClass('rating');
+      rating.text('Rating: ' + res.rating);
+      var playPause = $('<span>').addClass('playPause');
+      playPause.html('<i class="fas fa-play"></i>');
+      gifOverlay.append(playPause, rating);
       var myGif = $('<img>').addClass('gif');
       myGif.attr('src', res.images.fixed_height_still.url);
       myGif.attr('data-src-still', res.images.fixed_height_still.url);
       myGif.attr('data-src-gif', res.images.fixed_height.url);
       myGif.attr('data-state', "still");
-      gifDiv.append(myGif);
+      gifDiv.append(myGif, gifOverlay);
       gifHolder.append(gifDiv);
     })
     
@@ -102,13 +106,18 @@ $(document).on("click", ".remove", function() {
 });
 
 
-$(document).on("click", ".gif", function() {
-  if ($(this).attr('data-state') === 'still') {
-    $(this).attr('src', $(this).data('src-gif'));
-    $(this).attr('data-state', 'playing');
+$(document).on("click", ".gifContainer", function() {
+  var myGif = $(this).find('.gif');
+  if (myGif.attr('data-state') === 'still') {
+    myGif.attr('src', myGif.data('src-gif'));
+    myGif.attr('data-state', 'playing');
+    $(this).addClass('playing');
+    $(this).find('.playPause').html('<i class="fas fa-pause"></i>');
   } else {
-    $(this).attr('src', $(this).data('src-still'));
-    $(this).attr('data-state', 'still')
+    myGif.attr('src', myGif.data('src-still'));
+    myGif.attr('data-state', 'still');
+    $(this).removeClass('playing');
+    $(this).find('.playPause').html('<i class="fas fa-play"></i>');
   }
 })
 

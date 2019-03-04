@@ -82,20 +82,77 @@ html, body {
   min-height: 100%;
 }
 
+
 .gifHolder {
   display: flex;
   flex-wrap: wrap;
   padding-bottom: 20px;
+
 }
 
 .gifContainer {
-  padding: 10px;
+  margin: 10px;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  position: flex;
+  align-content: flex-end;
+  flex-direction: column;
 }
 
 .gif {
+  position: relative;
   border-radius: 4px;
-  cursor: pointer;
 }
+
+.gifOverlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+.rating {
+  width: 100%;
+  display: block;
+  position: absolute;
+  bottom: 3px;
+  padding: 10px;
+  color: white;
+  text-transform: uppercase;
+  font-size: .7em;
+  background: rgba(0,0,0,0.8);
+  border-radius: 0 0 4px 4px;
+  opacity: 1;
+  transition: opacity .25s ease;
+}
+
+.playPause {
+  width: 50px;
+  height: 50px;
+  background: rgba(0,0,0,0.6);
+  border-radius: 50%;
+  color: white;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  left: 50%;
+  top: 50%;
+  opacity: 1;
+  transition: opacity .15s ease;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+.gifContainer.playing .playPause, .gifContainer.playing .rating{
+  opacity: 0;
+}
+
+.gifContainer.playing:hover .playPause {
+  opacity: 1;
+}
+
 
 h2 {
   padding: 20px;
